@@ -1,0 +1,568 @@
+SSH Keys and Using Them (Windows to Linux): 
+
+  
+
+Generate Keys: 
+
+    ssh-keygen >> Use a passphrase, this will mean that only someone who knows the phrase can use the key >> Name it 
+
+  
+
+Making Key Usable: 
+
+    In ~/.ssh/authorized keys place the key.pub text into this file 
+
+    Restart sshd - systemctl restart sshd 
+
+  
+
+Using Keys From The CLI: 
+
+    ssh user@target -i keyfile (not the .pub one) 
+
+  
+
+Using Keys From PuTTY With Existing Key 
+
+    Open puttykeygen 
+
+    Go to conversions >> Import Key 
+
+    Select the key (Private) 
+
+    Name and passphrase the key 
+
+    Hit Save Private Key 
+
+    Open PuTTY 
+
+    Fill in host and port as normal 
+
+    On the left >> SSH >> Auth >> Credentials 
+
+    Select your private key 
+
+     
+
+     
+
+     
+
+Config Changes On Target 
+
+    In /etc/ssh/sshd_config 
+
+    PubKeyAuthentication yes 
+
+    PermitRootLogin no 
+
+    PasswordAuthentication no 
+
+    MaxSessions 1 (Use with cation, or not at all. Be careful) 
+
+    X11Forwarding no 
+
+    Restart sshd to apply 
+
+ 
+
+ 
+
+Linux 
+
+    Keep WordPress Updated: 
+
+    Use the following command to update the WordPress core: 
+
+sudo wp core update 
+
+    Use the following command to update all plugins: 
+
+sudo wp plugin update --all 
+
+    Use the following command to update all themes: 
+
+sudo wp theme update --all 
+
+    Use Strong Passwords: 
+
+    Use the following command to generate a new WordPress user password: 
+
+sudo wp user update username --user_pass=newpassword 
+
+    Replace "username" with the username of the user whose password you want to change, and replace "newpassword" with a strong, unique password. 
+
+    Use SSL/TLS Encryption: 
+
+    Install an SSL/TLS certificate on your web server to encrypt traffic between the server and clients. 
+
+    Use the following command to configure WordPress to use HTTPS: 
+
+sudo wp search-replace 'http://example.com' 'https://example.com' 
+
+    Replace "http://example.com" with the URL of your WordPress site using HTTP and "https://example.com" with the URL of your WordPress site using HTTPS. 
+
+    Limit Login Attempts: 
+
+    Use the following command to install a plugin that limits the number of login attempts: 
+
+sudo wp plugin install limit-login-attempts-reloaded --activate 
+
+    Use the following command to configure the plugin: 
+
+sudo wp option update limit_login_reloaded_settings '{"allowed_lockouts":3,"lockout_duration":60,"allowed_retries":5,"retry_time":5}' --format=json 
+
+    This sets the maximum number of allowed lockouts to 3, the lockout duration to 60 seconds, the maximum number of allowed retries to 5, and the retry time to 5 seconds. 
+
+    Use Two-Factor Authentication: 
+
+    Use the following command to install a plugin that adds two-factor authentication: 
+
+sudo wp plugin install two-factor --activate 
+
+    Use the following command to configure the plugin: 
+
+sudo wp option update two_factor_providers_enabled '{"Google Authenticator":true}' --format=json 
+
+    This enables the Google Authenticator two-factor authentication provider. 
+
+    Protect wp-config.php File: 
+
+    Use the following command to create a new .htaccess file: 
+
+sudo nano /var/www/html/.htaccess 
+
+    Add the following code to the file: 
+
+<files wp-config.php> 
+
+order allow,deny 
+
+deny from all 
+
+</files> 
+
+    Save and close the file. 
+
+Windows 
+
+    Keep WordPress Updated: 
+
+    Use the following command to update the WordPress core: 
+
+wp core update 
+
+    Use the following command to update all plugins: 
+
+wp plugin update --all 
+
+    Use the following command to update all themes: 
+
+wp theme update --all 
+
+    Use Strong Passwords: 
+
+    Use the following command to generate a new WordPress user password: 
+
+wp user update username --user_pass=newpassword 
+
+    Replace "username" with the username of the user whose password you want to change, and replace "newpassword" with a strong, unique password. 
+
+    Use SSL/TLS Encryption: 
+
+    Install an SSL/TLS certificate on your web server to encrypt traffic between the server and clients. 
+
+    Use the following command to configure WordPress to use HTTPS: 
+
+wp search-replace 'http://example.com' 'https://example.com' 
+
+    Replace "http://example.com" with the URL of your WordPress site using HTTP and "https://example.com" with the URL of your WordPress site using HTTPS. 
+
+    Limit Login Attempts: 
+
+    Use the following command to install a plugin that limits the number of login attempts: 
+
+wp plugin install limit-login-attempts-reloaded --activate 
+
+    Use the following command to configure the plugin: 
+
+wp option update limit_login_reloaded_settings '{"allowed_lockouts":3,"lockout_duration":60,"allowed_retries":5,"retry_time":5}' --format=json 
+
+    This sets the maximum number of allowed lockouts to 3, the lockout duration to 60 seconds, the maximum number of allowed retries to 5, and the retry time to 5 seconds. 
+
+    This enables the Google Authenticator two-factor authentication provider. 
+
+    Protect wp-config.php File: 
+
+    Use the following command to create a new .htaccess file: 
+
+notepad.exe C:\path\to\your\wordpress\installation\.htaccess 
+
+    Add the following code to the file: 
+
+<files wp-config.php> 
+
+order allow,deny 
+
+deny from all 
+
+</files> 
+
+    Save and close the file. 
+
+ 
+
+    Enforce Strong Password Policies: 
+
+    Open the Group Policy Management Console (GPMC) on your domain controller. 
+
+    Navigate to the "Default Domain Policy" or create a new password policy. 
+
+    In the GPO editor, navigate to Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy 
+
+    Edit the policy and configure settings such as password length, complexity, history, and expiration. 
+
+    Require users to choose strong passwords that include a mix of uppercase and lowercase letters, numbers, and special characters. 
+
+    Set a maximum password age and enable password expiration to ensure users change their passwords regularly. 
+
+    Implement Password Complexity Requirements: 
+
+    Configure the password policy to require a minimum password length and complexity. 
+
+    Set the "Password must meet complexity requirements" policy to enforce passwords that include a combination of letters, numbers, and special characters. 
+
+    Disable the "Password must meet minimum length requirements" policy to ensure users choose passwords that meet your organization's security standards. 
+
+    Enable Password Hashing: 
+
+    Configure your domain controller to store password hashes instead of clear text passwords. 
+
+    Double-click on "Store passwords using reversible encryption" and select "Disabled". This setting will ensure that passwords are stored using a one-way hash instead of being reversible encrypted 
+
+    Close the GPO editor and link the GPO to the appropriate organizational unit (OU) or domain 
+
+    Verify that password hashes are being stored instead of clear text passwords by checking the "pwdLastSet" attribute of a user account using the Active Directory Users and Computers console 
+
+    Password hashes are one-way encrypted values that cannot be reversed to the original password. 
+
+    Use a secure hash algorithm such as SHA-256 to generate password hashes. 
+
+    Implement Password Lockout Policies: 
+
+    Configure the account lockout policy to prevent brute-force attacks by locking out user accounts after a certain number of failed login attempts. 
+
+    "Account lockout threshold": Set the number of failed login attempts after which a user account will be locked out. A value of 5 is recommended 
+
+    "Reset account lockout counter after": Set the time period (in minutes) after which the failed login attempt counter will reset. A value of 15 minutes is recommended 
+
+    "Account lockout duration": Set the duration (in minutes) for which a user account will be locked out after the account lockout threshold is reached. A value of 30 minutes is recommended 
+
+ 
+
+    Force a group policy update on all domain controllers by running the following command in an elevated Command Prompt 
+
+gpupdate /force 
+
+ 
+
+ 
+
+Configure Certification Authority Role on Windows Server 
+
+    Server Manager à Add Role 
+
+    Next on first screen 
+
+    Leave “Role-based or Feature-based installation” selected and click next 
+
+    Leave default for “Destination Server” and click next 
+
+    Select Active Directory Certificate Services, Certification Authority and Web Enrollment should be selected > on prompt click “Add Features” and click next and then next again 
+
+    Leave defaults and continue through to install 
+
+    Once install is complete click on the  and then on “Configure Active Directory…” 
+
+    Leave default on first prompt and click next 
+
+    Check the box for Certification Authority and click next through all of the remaining prompts 
+
+    Configure web server template and issue certificate 
+
+    Server Manager à Tools à Certification Authority 
+
+    Right-click on Certificate Templates à Manage (opens Certificate Template Console) 
+
+    Right-click on Web Server à Duplicate Template 
+
+    Click on General tab à Template display name: Web-Server-Template à Check box for “Publish certificate in Active Directory” 
+
+    Click on Subject Name tab à select Build from this Active Directory Information à Subject name format: DNS name à Include this information in alternate subject name: check DNS name box 
+
+    Click on Security tab à with Authenticated Users selected à Permissions for Authenticated Users: check Enroll box 
+
+    Close Certificate Template Console and you’re back at Certification Authority 
+
+    Issue Certificate Template 
+
+    Right-click on Certificate Templates à Certificate Template to Issue (opens Enable Certificate Templates prompt) à Select Web-Server-Template and click OK. 
+
+    Create new certificate for Web Server 
+
+    Click on Windows start and type mmc and click enter (opens empty console) 
+
+    Click on File à Add/Remove snap-in (opens prompt) à select Certificates and click okay (closes prompt and back at main window) 
+
+    Expand Personal à Certificates (you see one certificate and we will add a new one to use in IIS) à right-click All Tasks à Request New Certificate (prompt opens) 
+
+    Certificate Enrollment prompt à click next for following two prompt à Request Certificates à select and right-click on Web-Server-Template à Certificate Properties à Friendly name: CIS230-SSL-WEB and click ok à click Enroll and then Finish 
+
+ 
+
+Enable SSL and set new certificate 
+
+    Server Manager à Tools à Internet Information Services à expand LAB-SRV-DC01 à expand Sites à Click on Default Web Site à on right side under “Actions” and “Edit Site click on “Bindings…” à prompt opens for Site Bindings à click Add…à prompt opens Add Site Binding à set Type to https (SSL Certificate: will now show) and select CIS230-SSL-Web and click OK à click Close on Site Bindings à back on main IIS window on the right side and under “Manage Website”, click on Restart 
+
+    Verify SSL on Web Server 
+
+    Open up an Internet browser and go to https://cis230-win2019.cis230.local and the little lock should show as trusted site.  
+
+ 
+
+Configure RSA keys for Administrator and copy to Linux for public key logon 
+
+    Same as on linux à ssh-keygen -t rsa 
+
+    scp c:\Users\Administrator\.ssh\id_rsa.pub 192.168.255.2:\home\administrator\.ssh\authorized_keys 
+
+    In Post-Execution is validation – ssh to Linux should not require password 
+
+    Linux part must be completed to validate public key login works 
+
+ 
+
+Add Windows CA certicate as a trusted Root CA 
+
+    Copy certificate file from Windows Server to Linux 
+
+    sudo cp win-ca-cert.crt /usr/local/share/ca-certificates/win-ca-cert.crt 
+
+    Update CA store 
+
+    sudo update-ca-certificates 
+
+    Open Internet browser and go to https://lab-srv-dc01-cis230-lab.local 
+
+    On Firefox, you will manually add the win-ca-cert.crt file to Trusted Root Certification Authority (located in Downloads) 
+
+ 
+
+ 
+
+    Generate a Certificate Signing Request (CSR) 
+
+    Open the Internet Information Services (IIS) Manager on your web server. 
+
+    Select your web server from the left-hand pane, then select "Server Certificates" from the center pane. 
+
+    Click "Create Certificate Request" from the right-hand pane and fill in the required information, such as the common name (CN) of the website, organization name, and location. 
+
+    Choose the appropriate cryptographic service provider (CSP) and key bit length. 
+
+    Submit the CSR to a Certificate Authority (CA) 
+
+    Copy the CSR file to your clipboard or save it as a text file. 
+
+    Submit the CSR to a trusted CA to obtain a signed SSL/TLS certificate. 
+
+    The CA will verify your identity and issue a certificate if your request is valid. 
+
+    Install the SSL/TLS certificate on your web server 
+
+    Once you receive the SSL/TLS certificate from the CA, save it to your web server. 
+
+    Open the IIS Manager and select your web server from the left-hand pane. 
+
+    Select "Server Certificates" from the center pane. 
+
+    Click "Complete Certificate Request" from the right-hand pane and browse to the location of your SSL/TLS certificate. 
+
+    Enter a friendly name for the certificate and click "OK." 
+
+    Bind the SSL/TLS certificate to your website 
+
+    Select your website from the left-hand pane in IIS Manager. 
+
+    Select "Bindings" from the right-hand pane. 
+
+    Click "Add" and select "https" as the type and choose the SSL/TLS certificate from the dropdown list. 
+
+    Choose the appropriate IP address and port number, then click "OK" to save the binding. 
+
+    Configure the web server to use HTTPS: 
+
+    Use the following command to configure your web server to use HTTPS: 
+
+Set-WebConfigurationProperty -Filter "system.webServer/security/access" -Name "sslFlags" -Value "Ssl, SslNegotiateCert, SslRequireCert" -PSPath "IIS:\Sites\Default Web Site" 
+
+    Replace "Default Web Site" with the name of your website in IIS. 
+
+    Use HTTP Strict Transport Security (HSTS): 
+
+    Use the following command to add an HSTS header to your web server response: 
+
+Set-WebConfigurationProperty -Filter "system.webServer/httpProtocol/customHeaders/add[@name='Strict-Transport-Security']" -Name "value" -Value "max-age=31536000; includeSubDomains" -PSPath "IIS:\Sites\Default Web Site" 
+
+    This sets the HSTS header to expire after one year and includes all subdomains. 
+
+    Use HTTP Public Key Pinning (HPKP): 
+
+    Use the following command to add an HPKP header to your web server response: 
+
+Set-WebConfigurationProperty -Filter "system.webServer/httpProtocol/customHeaders/add[@name='Public-Key-Pins']" -Name "value" -Value "pin-sha256=\"<your-public-key-hash>\"; max-age=31536000; includeSubDomains" -PSPath "IIS:\Sites\Default Web Site" 
+
+    Replace "<your-public-key-hash>" with the SHA-256 hash of your public key. 
+
+    Disable HTTP TRACE method: 
+
+    Use the following command to disable the HTTP TRACE method: 
+
+Set-WebConfigurationProperty -Filter "system.webServer/security/requestFiltering/verbs/add[@verb='TRACE']" -Name "allowed" -Value "false" -PSPath "IIS:\Sites\Default Web Site" 
+
+ 
+
+ 
+
+ 
+
+MySQL Security Practices and Guide 
+
+Note – MySQL commands ARE NOT case sensitive. I have capitalized them for visibility in the this document. 
+
+To begin securing MySQL and MariaDB, you can run a script that is included in installations of MariaDB and MySQL DB. This script is called “mysql_secure_installation” 
+
+This script walks you through the basic security practices of a deployed database.  
+
+Databases upon initial creation have a Test DB, as well a Test user. These test users can simply log in to the database without any password credentials. The mysql_secure_installation script removes both the testdb and the test users, as well as sets a Root password for your ROOT account ON THE DATABASE. 
+
+Next, you will receive a prompt asking you to confirm if you would like to switch to unix_socket_authentication. This is a plugin that allows for passwordless logins. You can check your plugins by issuing the –SELECT host, user, password, plugin FROM mysql.user; (Inside the DB) 
+
+This will display the hashed password of the user, as well as the plugin they are using. For a secure DB, you want the plugins to be listed as mysql_native_password. This ensures that a password will be required before being able to access the database.  
+
+Lastly, you’ll be asked if you want to reload and flush the tables to ensure new changes took effect. 
+
+(As I’ve ran this script, I had noticed that multiple times despite setting my root user password, I WAS STILL ABLE TO LOG IN AS ROOT WITHOUT A PASSWORD)  
+
+I was able to remediate this by logging into the database after the secure install script and running the command – 
+
+ALTER USER (username)@(localhost or % (% is default) IDENTIFIED BY ‘password_string’; 
+
+This command alters the users password manually, and after issuing you should rerun the SELECT host, user, password, plugin FROM mysql.user; to ensure that the password string is hashed. 
+
+You’ll also see values in the usernames such as @localhost and maybe @%. % is the default value.  
+
+NEVER log in to the database as root. After running the secure install script. You’d ideally want to create a user on the host machine designated for accessing mysql. Additionally, create a user in the database specifically for access.  
+
+Ensure that you check what permissions are assigned to each database user. You can check this by issuing the select Grant; command, this will show you what privileges the user you are connected as has.  
+
+If you’d like to check the privileges of a specific user, you can run SELECT * FROM mysql.user WHERE user=’username’\G 
+
+Once you’ve ran the script, created separate host users and database users, you should ensure that everything inside of the /etc/mysql file is properly configured. You can bind an IP address from the my.cnf file, as well as configure which port you’d like for the DB to run on.  
+
+Ensure that after each change, you issue a FLUSH PRIVILEGES; command to ensure that changes will be reflected.  
+
+Mysql by default will be listed in the /etc/ directory, and can be configured manually with the my.cnf file along with other configuration files in the SQL directory.  
+
+To check the version of SQL, run the command SELCT @@version; 
+
+ 
+
+Securing & Managing Docker Containers (Linux) 
+
+ 
+
+Basic User Management: 
+
+It’s always important to change the root password and disable root altogether on all of your containers and instead create an unprivileged user that is only able to manage the processes that container is running. To do this you can use the “docker exec” command which allows the user to execute commands on the container itself. Here’s an example of how to do that: 
+
+    Docker exec -itu 0 <container ID> passwd 
+
+    -itu 0 refers to selecting interactive mode for the UID 0 (aka root) 
+
+    You can also use “docker exec -it <container ID> usermod -s /sbin/nologin” to disable the root account in the container and also “passwd -l” to lock the password. 
+
+You can also use this command to create an unprivileged user. To do so issue the following commands: 
+
+    Docker exec -it <container ID> adduser jeff 
+
+    Add jeff to the necessary group: “docker exec -it <container ID> usermod -aG mysql jeff”. 
+
+Now Jeff can only manage the MySQL database and has no other perms. DO NOT GIVE THESE USERS SUDO PRIVILEGES!! That’s what “docker exec” is for.  
+
+ 
+
+Docker File/Compose Environment Variables: 
+
+Most containers you find on a system will have been generated from either a docker file or a docker-compose.yml file. These files can contain important environment variables like the username and password of the database/users on the container. An attacker can use the docker inspect command to expose the environment variables of the container and thus see the password of the database.  
+
+Luckily, you can store your environment variables in a separate encrypted file somewhere else on the system and then use the –env-file option in your docker run command to specify the list of environment variables you want for that container. 
+
+Container environment variables general look like this: 
+
+DB_HOST = localhost 
+DB_PORT=3306 
+DB_USER=myuser 
+DB_PASSWORD=mypassword 
+
+This is important information we don’t want anyone to see so we make a text file containing those variables and store them elsewhere. Then we use this command to call to the file where the environment variables are stored. 
+
+    Docker run –env-file <path-to-file> <container image> 
+
+You can also use this with docker-compose. In your docker-compose.yml file, ensure you specify an array that has the path to the env-file. It would look something like this: 
+
+Env_file: 
+	      - /etc/fonts/env-vars.txt 
+
+Namespaces 
+
+Changing namespaces for the docker daemon is critical in preventing an attacker from gaining root privileges during a container breakout. The idea involves changing the user the docker daemon runs on. By default docker.service runs from root as well as many other Linux services. However, you can switch it to an unprivileged user that you created, or you use the default docker user named “dockremap”.  
+
+There are many ways you can do this. One is to set the namespace manually using the dockerd command: 
+
+    Dockerd –userns-remap=’default” 
+
+This is quicker, but if the daemon for some reason stops or restarts, the name space changes back to root. To prevent this, we need to modify the daemon itself. 
+
+There are two ways you can do this. One is to edit the daemon.json file in the /etc/docker directory. The other way, which in my opinion is more reliable, is to modify the docker.service file. This contains the configurations for the daemon itself. Once you are in the file, scroll all the way down and add the following lines: 
+
+    [Service] 
+    ExecStart= 
+    ExecStart=/usr/bin/dockerd –userns-remap=”default” 
+
+Technically you could add any unprivileged user you created. Just replace “default” with the name of your user. Now we need to issue two commands to solidify the changes.  
+
+    Sudo systemctl daemon-reload 
+
+    Sudo systemctl restart docker.service 
+
+If no errors appear that means it worked. Now issue the command “sudo cat /etc/subuid”. You should see this output: 
+ 
+
+Either your custom user or the docker user should appear under your primary user. This means that the daemon has created the alternate user. Note the UID is 231072. 
+
+Now let’s see if this truly works. Spin up a container and run it in the background then the issue the command, “docker container top <container name>”. You should see the following output: 
+
+ 
+
+The above command was issued before the namespace was changed. As you can see, it’s root. However, after we modified the daemon, you can see the container is now running under the UID of our new user. This means that even if the attacker breaks out of the container, they will not have root privileges! 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
