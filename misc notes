@@ -1,0 +1,41 @@
+modprobe -c - shows modules and what they are being used by in a linux machine 
+modprobe -h - modprobe help page
+insmod - inserts a module into a Linux Kernel 
+depmod - description - generate modules.dep and map files 
+
+
+Log into DB
+command - show variables like 'datadir';
+command - show variables like 'port' ;
+
+NMAP
+
+sudo nmap -T5 (ip address) 
+
+sudo nmap -T5 172.20.240.11--- to scan the network this IP is associated with --- change 11 to 0
+
+sudo nmap -T5 172.20.240.0/24 >> example of how to properly scan the network
+
+nmap -sP
+
+nmap --script=ssh-brute (ip address)
+
+nmap -sS localhost
+
+
+is going to be in the file explorer, access like a network share.
+ \\share.pcdc.local\worldshare.
+on local machine
+cannot block ssh or rdp
+
+Login 
+Check IP address - Remember IOT devices on the network/Scan network so you can make your map
+Users - Allowed users / not allowed users
+Services - Needed services / extra services 
+OS - Type and patch 
+netstat -aon 
+
+lsof -i -p 
+
+Mysql command to show user tables in a db 
+SELECT User, Host FROM mysql.user;
